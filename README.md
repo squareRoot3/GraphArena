@@ -61,11 +61,11 @@ Unzip `final_results.zip` and run `score_LLM.ipynb` to reproduce the results in 
 
 We have integrated the problem text and all results into a single JSON file `GraphArena_all.json` for reference. The file is organized in the following format:
 
-```json
+```
 {
     "Task_name": [
         {
-            "id": 0,  // 0-499 for small graphs (easy) and 500-999 for large graphs (hard)
+            "id": 0,  % 0-499 for small graphs (easy) and 500-999 for large graphs (hard)
             "problem_text": "...",
             "LLM responses": "..."
         },
