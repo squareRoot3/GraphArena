@@ -90,8 +90,8 @@ For more human-readable examples, please refer to `examples.md`.
 
 ## Licensing
 
-The dataset is released under the CC BY-SA 4.0 License, and the code repository is licensed under the BSD-2 Clause.
+The dataset is available under the CC BY-SA 4.0 License. The code repository is licensed under the BSD-2 Clause.
 
 ## Long-term Preservation
 
-This repository is owned by Jianheng Tang (sqrt3tjh@gmail.com). Qifan Zhang (bklight999@gmail.com) and Yuhan Li (yuhanli@mail.nankai.edu.cn) will also help maintain the GraphArena dataset and codebase over the long term.
+This repository is maintained by Jianheng Tang (sqrt3tjh@gmail.com). For long-term support and updates, Qifan Zhang (bklight999@gmail.com) and Yuhan Li (yuhanli@mail.nankai.edu.cn) are also key maintainers.
