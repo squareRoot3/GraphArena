@@ -4,7 +4,7 @@ This repository contains the codebase for the manuscript:
 
 > **GraphArena: Benchmarking Large Language Models on Graph Computational Problems**  
 > *Authors: Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*  
-> NeurIPS 2023 Datasets and Benchmarks Track Submission
+> NeurIPS 2024 Datasets and Benchmarks Track Submission
 
 ## Environment Setup
 
