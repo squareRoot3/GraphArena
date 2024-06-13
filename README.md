@@ -21,7 +21,7 @@ pip install rdkit ogb pybind11 graph-walker
 
 The dataset `dataset.zip` for benchmarking can be downloaded and unzipped directly from our [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
 
-For those who prefer to prepare the dataset from scratch, download `source.zip`, unzip it, and execute the script `run_dataset.sh`. Note that results may vary due to the randomness in the data sampling process.
+For those who prefer to prepare the dataset from scratch, download `source.zip`, unzip it, and execute the script `run_dataset.sh`.
 
 ## LLM Inference
 
