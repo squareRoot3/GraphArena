@@ -1,14 +1,15 @@
 # GraphArena Benchmark
 
-This is the official implementation of the following manuscript:
+This repository contains the codebase for the manuscript:
 
->GraphArena: Benchmarking Large Language Models on Graph Computational Problems  
-*Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*  
-NeurIPS 2023 Datasets and Benchmarks Track Submission  
+> **GraphArena: Benchmarking Large Language Models on Graph Computational Problems**  
+> *Authors: Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*  
+> NeurIPS 2023 Datasets and Benchmarks Track Submission
 
 ## Environment Setup
 
-To set up the environment, follow these steps:
+To set up the required environment, please follow the steps below:
+
 ```bash
 conda create -n GraphArena
 source activate GraphArena
@@ -18,65 +19,70 @@ pip install rdkit ogb pybind11 graph-walker
 
 ## Dataset Preparation
 
-You can download and unzip the processed dataset `dataset.zip` directly from [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
+The dataset `dataset.zip` can be downloaded and unzipped directly from our [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
 
-Alternatively, you can construct the dataset from the source data. Download and unzip `source.zip`, then run `run_dataset.sh`. Note that the constructed dataset may differ due to randomness in sampling.
+For those who prefer to build the dataset from scratch, download `source.zip`, unzip it, and execute the script `run_dataset.sh`. Note that results may vary due to the randomness in the data sampling process.
 
 ## LLM Inference
 
-To run LLM inference, use the following command:
+Execute LLM inference using the command below:
 
 ```bash
 python benchmark_LLM.py --task $task --problem_num $problem_num --example_num $example_num --results $results --llm $llm --difficulty $difficulty --resume $resume --sleep $sleep
 ```
 
-For example, to run GPT on the full list (500 problems) on the small graphs of the TSP task:
+For example, running GPT on the TSP task with small graphs and 500 problems:
 
 ```bash
 python benchmark_LLM.py --task TSP --problem_num 500 --llm gpt --difficulty easy
 ```
 
-To benchmark an LLM on all tasks, refer to `run_benchmark.sh`. The meaning of all arguments can also be found in `benchmark_LLM.py` and `run_benchmark.sh`.
+For comprehensive benchmarking across all tasks, run `run_benchmark.sh`. Details about command-line arguments are available in both `benchmark_LLM.py` and `run_benchmark.sh`.
 
-The following LLM models are supported:
+Supported LLM models include:
 
 ```json
-"gpt4": "gpt-4o",
-"gpt": "gpt-3.5-turbo-0125", 
-"claude": "claude-3-haiku-20240307",
-"mixtral": "mistralai/Mixtral-8x7B-Instruct-v0.1",
-"deepseek": "deepseek-chat",
-"llama8b": "meta-llama/Llama-3-8b-chat-hf",
-"llama": "meta-llama/Llama-3-70b-chat-hf",
-"qwen7b": "qwen1.5-7b-chat",
-"qwen": "qwen1.5-72b-chat",
-"gemma": "gemma-7b-it",
+{
+    "gpt4": "gpt-4o",
+    "gpt": "gpt-3.5-turbo-0125",
+    "claude": "claude-3-haiku-20240307",
+    "mixtral": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "deepseek": "deepseek-chat",
+    "llama8b": "meta-llama/Llama-3-8b-chat-hf",
+    "llama": "meta-llama/Llama-3-70b-chat-hf",
+    "qwen7b": "qwen1.5-7b-chat",
+    "qwen": "qwen1.5-72b-chat",
+    "gemma": "gemma-7b-it"
+}
 ```
 
 ## LLM Evaluation
 
-Unzip `final_results.zip` and run `score_LLM.ipynb` to reproduce the results in the paper.
+To reproduce the results in our manuscript, unzip `final_results.zip` and run `score_LLM.ipynb`.
 
 ### Case Demonstration
 
-We have integrated the problem text and all results into a single JSON file `GraphArena_all.json` for reference. The file is organized in the following format:
+The full dataset of problems and their corresponding LLM responses is available in `GraphArena_all.json`. This JSON file organizes the data as follows:
 
 ```
 {
     "Task_name": [
         {
-            "id": 0,  % 0-499 for small graphs (easy) and 500-999 for large graphs (hard)
+            "id": 0,  // IDs range from 0-499 for small graphs (easy) to 500-999 for large graphs (hard)
             "problem_text": "...",
             "LLM responses": "..."
         },
         ...
     ]
-    ...
 }
 ```
 
-More examples can be found in `GraphArena_all.json` and `GraphArena_example.txt`.
+For more human-readable examples, please see `GraphArena_example.txt`.
 
-## License
+## Licensing
 
-The dataset is under the CC BY-SA 4.0 License. The code repository is under the BSD-2 License.
+The dataset is released under the CC BY-SA 4.0 License, and the code repository is licensed under the BSD-2 Clause.
+
+## Maintainers
+
+This repository is actively maintained by Jianheng Tang (sqrt3tjh@gmail.com).
