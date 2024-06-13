@@ -21,7 +21,7 @@ class GED_Task(NPTask):
                 for match in reversed(matches):
                 # match = matches[-1]
                     gmap = tuple(map(int, re.split(r'[\s,]+', match.strip())))
-                    print('gmap', gmap)  # Debug: print the gmap
+                    # print('gmap', gmap)  # Debug: print the gmap
                     if set(gmap) == set(range(g1.number_of_nodes())) and len(gmap) == g1.number_of_nodes():
                         g1 = nx.relabel_nodes(g1, dict(zip(range(g1.number_of_nodes()), gmap)))
                         edit_cost = 0

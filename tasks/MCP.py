@@ -34,7 +34,7 @@ class MCP_Task(NPTask):
                     continue
                 node_list.append(node)
             g_sub = nx.induced_subgraph(g, node_list)
-            print('MVC', g_sub)
+            # print('MVC', g_sub)
             if g_sub.number_of_edges() >= len(node_list) * (len(node_list) - 1) / 2:
                 return len(node_list)
             return -2

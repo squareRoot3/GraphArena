@@ -19,9 +19,9 @@ pip install rdkit ogb pybind11 graph-walker
 
 ## Dataset Preparation
 
-The dataset `dataset.zip` can be downloaded and unzipped directly from our [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
+The dataset `dataset.zip` for benchmarking can be downloaded and unzipped directly from our [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
 
-For those who prefer to build the dataset from scratch, download `source.zip`, unzip it, and execute the script `run_dataset.sh`. Note that results may vary due to the randomness in the data sampling process.
+For those who prefer to prepare the dataset from scratch, download `source.zip`, unzip it, and execute the script `run_dataset.sh`. Note that results may vary due to the randomness in the data sampling process.
 
 ## LLM Inference
 
@@ -39,7 +39,7 @@ python benchmark_LLM.py --task TSP --problem_num 500 --llm gpt --difficulty easy
 
 For comprehensive benchmarking across all tasks, run `run_benchmark.sh`. Details about command-line arguments are available in both `benchmark_LLM.py` and `run_benchmark.sh`.
 
-Supported LLM models include:
+Supported LLM models:
 
 ```json
 {
@@ -56,13 +56,22 @@ Supported LLM models include:
 }
 ```
 
-## LLM Evaluation
+## Reproducing Evaluation Results
 
-To reproduce the results in our manuscript, unzip `final_results.zip` and run `score_LLM.ipynb`.
+To reproduce the results presented in our manuscript, please follow these steps:
+
+1. Unzip `final_results.zip`.
+2. Run the following scripts in sequence:
+- `reproduce_table1.ipynb`
+- `reproduce_figure2.py`
+- `reproduce_figure3.py`
+- `reproduce_figure4.py`
+
+Please note that the plotting process may take a few minutes to complete.
 
 ### Case Demonstration
 
-The full dataset of problems and their corresponding LLM responses is available in `GraphArena_all.json`. This JSON file organizes the data as follows:
+The full dataset of problems and their corresponding LLM responses is available in `final_results/GraphArena_all.json`. This JSON file organizes the data as follows:
 
 ```
 {
@@ -77,12 +86,12 @@ The full dataset of problems and their corresponding LLM responses is available 
 }
 ```
 
-For more human-readable examples, please see `GraphArena_example.txt`.
+For more human-readable examples, please refer to `examples.md`.
 
 ## Licensing
 
 The dataset is released under the CC BY-SA 4.0 License, and the code repository is licensed under the BSD-2 Clause.
 
-## Maintainers
+## Long-term Preservation
 
-This repository is actively maintained by Jianheng Tang (sqrt3tjh@gmail.com).
+This repository is owned by Jianheng Tang (sqrt3tjh@gmail.com). Qifan Zhang (bklight999@gmail.com) and Yuhan Li (yuhanli@mail.nankai.edu.cn) will also help maintain the GraphArena dataset and codebase over the long term.

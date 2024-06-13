@@ -89,7 +89,7 @@ class Diameter_Task(NPTask):
                 #print('non_existance connection')
                 return False
         if len(nx.shortest_path(g, route_list[0], route_list[-1])) != len(route_list):
-            print('not the shortest path')
+            # print('not the shortest path')
             return False
         return True
     

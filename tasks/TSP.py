@@ -30,7 +30,7 @@ class TSP_Task(NPTask):
             matches = matches.split(",")
             route_list = [find_node_by_name(g, node.strip()) for node in matches]
             # check if all nodes are visitied exactly once
-            print(route_list)
+            # print(route_list)
             if set(route_list) == set(g.nodes()) and len(route_list) == len(g.nodes()) + 1 and route_list[0] == route_list[-1]:
                 return self.compute_tour_length(g, route_list)
             return -2

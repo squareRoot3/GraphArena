@@ -20,7 +20,7 @@ class MIS_Task(NPTask):
             matches = matches.split(",")
             author_list = [author.strip() for author in matches]
             node_list= []
-            print(len(author_list))
+            # print(len(author_list))
             for author in author_list:
                 node = find_node_by_name(g, author)
                 if node is None:

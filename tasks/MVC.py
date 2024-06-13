@@ -21,7 +21,7 @@ class MVC_Task(NPTask):
             matches = matches.split(",")
             author_list = [author.strip() for author in matches]
             node_list= []
-            print(len(author_list))
+            # print(len(author_list))
             for author in author_list:
                 node = find_node_by_name(g, author)
                 if node is None:
@@ -34,7 +34,7 @@ class MVC_Task(NPTask):
     
     def is_feasible(self, g, node_list):  
         for u, v in g.edges():
-            print(u, v, node_list)
+            # print(u, v, node_list)
             if u not in node_list and v not in node_list:
                 return -2
         return len(node_list)
