@@ -5,7 +5,7 @@ This repository contains the codebase for the following manuscript:
 > **GraphArena: Benchmarking Large Language Models on Graph Computational Problems**  
 > *Authors: Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*  
 
-![intro](GraphArena.jpg)
+![intro](utils/GraphArena.jpg)
 
 ## Environment Setup
 
@@ -27,16 +27,22 @@ For those who prefer to prepare the dataset from scratch, download `source.zip`,
 
 ## LLM Inference
 
-Execute LLM inference using the command below:
+Call LLM API using the command below:
 
 ```bash
-python benchmark_LLM.py --task $task --problem_num $problem_num --example_num $example_num --results $results --llm $llm --difficulty $difficulty --resume $resume --sleep $sleep
+python benchmark_LLM_api.py --task $task --problem_num $problem_num --example_num $example_num --results $results --llm $llm --difficulty $difficulty --resume $resume --sleep $sleep
 ```
 
 For example, running GPT on the TSP task with small graphs and 500 problems:
 
 ```bash
-python benchmark_LLM.py --task TSP --problem_num 500 --llm gpt --difficulty easy
+python benchmark_LLM_api.py --task TSP --problem_num 500 --llm gpt --difficulty easy
+```
+
+If you want to evaluate LLMs locally, using the command below:
+
+```bash
+python benchmark_LLM_local.py --llm llama8b/GraphWiz
 ```
 
 For comprehensive benchmarking across all tasks, run `run_benchmark.sh`. Details about command-line arguments are available in both `benchmark_LLM.py` and `run_benchmark.sh`.
