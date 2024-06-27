@@ -1,4 +1,3 @@
-from matplotlib import pyplot as plt
 import networkx as nx
 import random
 import pickle
@@ -12,6 +11,7 @@ import math
 import time
 import itertools
 import pandas as pd
+import fast_tsp
 from tasks.base import *
 
 
@@ -89,14 +89,13 @@ class TSP_Task(NPTask):
             while len(self.problem_set) < count:            
                 node_list = list(G.nodes())
                 H = nx.induced_subgraph(G, random.sample(node_list, sample_node_size(min_nodes, max_nodes)))
-
-                if difficulty == 'easy':
-                    answer, path = self.exact_solver(H)
+                H = nx.relabel_nodes(H, {old_label: new_label for new_label, old_label in enumerate(H.nodes())})
+                answer, path = self.exact_solver(H)
                 if len(self.examples) < 100:
                     self.examples.append(self.generate_example(H, path))
                     continue
                 problem_text = self.generate_problem(H)
-                if len(problem_text) > 6000: 
+                if len(problem_text) > 6000:
                     continue
                 self.problem_set.append({
                     'id' : len(self.problem_set),
@@ -105,7 +104,6 @@ class TSP_Task(NPTask):
                     'exact_answer': answer,
                     'path': path
                 })
-                # print(f'problem {len(self.problem_set)}')
             self.save_dataset(difficulty)
 
     def generate_problem(self, graph):
@@ -124,25 +122,32 @@ class TSP_Task(NPTask):
         example.append("- Travel distances (in kilometers) between each pair of airports:")
         for edge in graph.edges(data=True):
             example.append(f"{graph.nodes[edge[0]]['name']} to {graph.nodes[edge[1]]['name']}: {edge[2]['weight']}")
-        
         answer = ", ".join([graph.nodes[node]['name'] for node in path])
         example.append(f"One shortest route: [{answer}].")
         return '\n'.join(example)
 
-    @staticmethod
-    def exact_solver(graph):
-        nodes = list(graph.nodes)
-        min_cost = float('inf')
-        for perm in itertools.permutations(nodes):
-            current_cost = 0
-            for i in range(len(perm) - 1):
-                current_cost += graph[perm[i]][perm[i + 1]]['weight']
-            current_cost += graph[perm[-1]][perm[0]]['weight']
-            if current_cost < min_cost:
-                min_cost = current_cost
-                route = list(perm) + [perm[0]]
-        return min_cost, route
+    def exact_solver(self, graph):
+        dis_mat = self.build_distance_matrix(graph)
+        route = fast_tsp.solve_tsp_exact(dis_mat)
+        route.append(route[0])
+        return self.compute_tour_length(graph, route), route
     
-    def approx_solver(self, graph):
-        route = nx.approximation.traveling_salesman_problem(graph, cycle=True, weight='weight')
-        return self.compute_tour_length(graph, route)
+    def approx_solver(self, graph, method='greedy'):
+        if method == 'random':
+            route = list(np.random.permutation(graph.nodes()))
+            route = route + [route[0]]
+        elif method == 'greedy':
+            route = nx.approximation.traveling_salesman_problem(graph, cycle=True, weight='weight', method=nx.approximation.greedy_tsp)
+        elif method == 'chris':
+            route = nx.approximation.traveling_salesman_problem(graph, cycle=True, weight='weight', method=nx.approximation.christofides)
+        return self.compute_tour_length(graph, route), route
+
+    @staticmethod
+    def build_distance_matrix(graph):
+        n = len(graph)
+        dist = [[0]*n for _ in range(n)]
+        for i in range(n):
+            for j in range(i+1, n):
+                dist[i][j] = graph.get_edge_data(i, j)['weight']
+                dist[j][i] = graph.get_edge_data(i, j)['weight']
+        return dist

@@ -1,10 +1,11 @@
 # GraphArena Benchmark
 
-This repository contains the codebase for the manuscript:
+This repository contains the codebase for the following manuscript:
 
 > **GraphArena: Benchmarking Large Language Models on Graph Computational Problems**  
 > *Authors: Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*  
-> NeurIPS 2024 Datasets and Benchmarks Track Submission
+
+![intro](GraphArena.jpg)
 
 ## Environment Setup
 
@@ -13,13 +14,14 @@ To set up the required environment, please follow the steps below:
 ```bash
 conda create -n GraphArena
 source activate GraphArena
-conda install openai pandas numpy networkx matplotlib pip
-pip install rdkit ogb pybind11 graph-walker
+conda install openai pandas numpy networkx pip
+pip install pybind11
+pip install rdkit ogb graph-walker
 ```
 
 ## Dataset Preparation
 
-The dataset `dataset.zip` for benchmarking can be downloaded and unzipped directly from our [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
+The dataset `dataset.zip` for benchmarking can be downloaded and unzipped directly from our [Google Drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing) or [OneDrive](https://hkustconnect-my.sharepoint.com/:f:/g/personal/jtangbf_connect_ust_hk/EtMw1C3z82ZCgyhinWnZR7UBWhdvK5LYBPWOQhWx9lAvjg?e=VzvrSH).
 
 For those who prefer to prepare the dataset from scratch, download `source.zip`, unzip it, and execute the script `run_dataset.sh`.
 
@@ -71,7 +73,7 @@ Please note that the plotting process may take a few minutes to complete.
 
 ### Case Demonstration
 
-The full dataset of problems and their corresponding LLM responses is available in `final_results/GraphArena_all.json`. This JSON file organizes the data as follows:
+The full dataset of problems and corresponding LLM responses is available in `final_results/GraphArena_all.json`. This JSON file organizes the data as follows:
 
 ```
 {
