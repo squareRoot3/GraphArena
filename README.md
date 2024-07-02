@@ -3,7 +3,7 @@
 This repository contains the codebase for the following manuscript:
 
 > **GraphArena: Benchmarking Large Language Models on Graph Computational Problems**  
-> *Authors: Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*
+> *Authors: Jianheng Tang, Qifan Zhang, Yuhan Li, Jia Li*  
 > [Arxiv](https://arxiv.org/abs/2407.00379v1)
 
 ![intro](utils/GraphArena.jpg)
