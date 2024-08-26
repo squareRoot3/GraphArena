@@ -97,3 +97,53 @@ class MVC_Task(NPTask):
         max_independent_set = max_clique
         min_vertex_cover = set(graph.nodes()) - set(max_independent_set)
         return len(min_vertex_cover), min_vertex_cover
+    
+    def min_weighted_vertex_cover(self, G, weight=None):
+        cost = dict(G.nodes(data=weight, default=1))
+        cover = set()
+        for u, v in G.edges():
+            if u in cover or v in cover:
+                continue
+            if cost[u] <= cost[v]:
+                cover.add(u)
+                cost[v] -= cost[u]
+            else:
+                cover.add(v)
+                cost[u] -= cost[v]
+        return cover
+    
+    def approx_solver(self, graph, method='greedy'):
+        if method == 'random': 
+            min_vertex_cover= list(graph.nodes)
+
+            while True:
+                # Check if current set is a vertex cover
+                if all(u in min_vertex_cover or v in min_vertex_cover for u, v in graph.edges):
+                    # Randomly try to remove a node
+                    node = random.choice(list(min_vertex_cover))
+                    min_vertex_cover.remove(node)
+                else:
+                    # If it's not a vertex cover anymore, stop
+                    min_vertex_cover.append(node)
+                    break
+            
+        elif method == 'greedy':
+            min_vertex_cover = []
+            edges = list(graph.edges)
+
+            # Sort edges by the sum of degrees of their endpoints, in descending order
+            edges.sort(key=lambda edge: graph.degree(edge[0]) + graph.degree(edge[1]), reverse=True)
+
+            while edges:
+                # Select an edge
+                u, v = edges.pop(0)
+                # Add both endpoints to the cover
+                min_vertex_cover.append(u)
+                min_vertex_cover.append(v)
+                # Remove all edges covered by u or v
+                edges = [edge for edge in edges if u not in edge and v not in edge]
+
+        elif method == 'chris':
+            min_vertex_cover = list(self.min_weighted_vertex_cover(graph,weight=None))
+        return len(min_vertex_cover),min_vertex_cover
+

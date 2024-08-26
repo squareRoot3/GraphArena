@@ -88,6 +88,32 @@ class MIS_Task(NPTask):
         complement_G = nx.complement(graph)
         max_clique = max(nx.find_cliques(complement_G), key=len)
         return len(max_clique), max_clique
+ 
+    def approx_solver(self, graph, method='greedy'):
+        if method == 'random': 
+            nodes = list(graph.nodes)
+            random.shuffle(nodes)
+            independent_set = []
+
+            for node in nodes:
+                # Check if the node can be added to the independent set
+                if all(neighbor not in independent_set for neighbor in graph.neighbors(node)):
+                    independent_set.append(node)
+                else:
+                    break
+
+        elif method == 'greedy':
+            nodes = sorted(graph.nodes, key=lambda x: graph.degree(x))
+            independent_set = []
+            for node in nodes:
+                # Check if the node can be added to the independent set
+                if not any(neighbor in independent_set for neighbor in graph.neighbors(node)):
+                    independent_set.append(node)
+
+        elif method == 'chris':
+            independent_set = list(nx.approximation.maximum_independent_set(graph))
+            
+        return len(independent_set),independent_set
 
 if __name__ == '__main__':
     task = MIS_Task('NPdataset')

@@ -106,3 +106,24 @@ class MCP_Task(NPTask):
     def exact_solver(graph):
         clique = max(nx.find_cliques(graph), key=len)
         return len(clique), clique
+    
+    
+    def approx_solver(self, graph, method='greedy'):
+        if method == 'random':
+            nodes = list(graph.nodes)
+            random.shuffle(nodes)
+            max_clique = []
+            for node in nodes:
+                if all(node in graph.neighbors(neighbor) for neighbor in max_clique):
+                    max_clique.append(node)
+                else:
+                    break
+        elif method == 'greedy':
+            nodes = sorted(graph.nodes, key=lambda x: graph.degree(x), reverse=True)
+            max_clique = []
+            for node in nodes:
+                if all(node in graph.neighbors(neighbor) for neighbor in max_clique):
+                    max_clique.append(node)
+        elif method == 'chris':
+            max_clique = list(nx.approximation.max_clique(graph))
+        return len(max_clique), max_clique
