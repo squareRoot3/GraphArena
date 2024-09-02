@@ -1,3 +1,4 @@
+# script for benchmarking three GNNs on all 10 tasks in GraphArena.
 python benchmark_GNN.py --task Distance --model GIN
 python benchmark_GNN.py --task Distance --model GAT
 python benchmark_GNN.py --task Distance --model SAGE
