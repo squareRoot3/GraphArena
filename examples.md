@@ -7,6 +7,7 @@ Your task is to find the common neighbors of two nodes in an undirected academic
 
 - Authors in the network: Keng Peng Tee, Toshiyuki Ohtsuka, David Q. Mayne, Darryl DeHaan, Miroslav Krstic, James B. Rawlings, Knut Graichen, Andreas Kugi, Pierre O. M. Scokaert, Christian Ebenbauer
 - Research collaborations between these authors: Keng Peng Tee and Miroslav Krstic, Keng Peng Tee and James B. Rawlings, Keng Peng Tee and David Q. Mayne, Keng Peng Tee and Pierre O. M. Scokaert, Keng Peng Tee and Darryl DeHaan, Toshiyuki Ohtsuka and Knut Graichen, Toshiyuki Ohtsuka and Miroslav Krstic, David Q. Mayne and Knut Graichen, David Q. Mayne and James B. Rawlings, David Q. Mayne and Christian Ebenbauer, David Q. Mayne and Pierre O. M. Scokaert, Darryl DeHaan and Knut Graichen, Darryl DeHaan and Christian Ebenbauer, Miroslav Krstic and Andreas Kugi, Miroslav Krstic and Christian Ebenbauer, James B. Rawlings and Knut Graichen, James B. Rawlings and Pierre O. M. Scokaert, James B. Rawlings and Christian Ebenbauer, Knut Graichen and Andreas Kugi, Knut Graichen and Pierre O. M. Scokaert, Pierre O. M. Scokaert and Christian Ebenbauer.
+
 Common neighbors between Keng Peng Tee and Toshiyuki Ohtsuka: [Miroslav Krstic]
 
 **Problem to Solve**
@@ -49,6 +50,7 @@ Within a connected component, any node can be reached from any other node throug
 
 - Names in the network: Barbara Perkins, Jonathon Mitchell, Jenny Trujillo, Adam Hoffman, Devin Nunez.
 - Friendship connections: Barbara Perkins and Jonathon Mitchell, Jenny Trujillo and Devin Nunez, Jenny Trujillo and Adam Hoffman, Adam Hoffman and Devin Nunez.
+
 The answer including one representative element from each connected component in the given social network: [Barbara Perkins, Jenny Trujillo]
 
 **Problem to Solve**
@@ -117,6 +119,7 @@ The diameter of a graph is the maximum distance between any pair of nodes in the
  - Poland is connected to Gorzów County via the relationship country.
  - Poland is connected to Stare Leśno via the relationship country.
  - Poland is connected to Wielki Łęck via the relationship country.
+
 One shortest path corresponding to the diameter in this graph is: [Village, Święta Lipka, Poland, Stare Leśno]
 
 **Problem to Solve**
@@ -268,6 +271,7 @@ Your task is to identify the shortest path between two specified entities in an 
  - Poland is connected to Dębinka  Lubusz Voivodeship via the relationship country.
  - Village is connected to Dębinka  Lubusz Voivodeship via the relationship type.
  - Warmian-Masurian Voivodeship is connected to Dębinka  Lubusz Voivodeship via the relationship http://www.w3.org/2000/01/rdf-schema#seeAlso.
+
 One shortest path between Dębinka  Lubusz Voivodeship and Poland is: [Dębinka  Lubusz Voivodeship, Poland]
 
 **Problem to Solve**
@@ -326,6 +330,7 @@ Molecule A:
 Molecule B:
 - Atoms: F (atom 0), B (atom 1), C (atom 2), N (atom 3), Br (atom 4).
 - Bonds: 0-1, 1-2, 1-4, 2-3.
+
 One optimal node mapping: [3, 2, 1, 0, 4].
 
 **Problem to Solve**
@@ -439,6 +444,7 @@ You are required to solve the Maximum Clique Problem for an undirected academic 
 
 - Authors in the network: Keng Peng Tee, Veit Hagenmeyer, Bartosz Käpernick, Karl Henrik Johansson, Darryl DeHaan, James B. Rawlings, Andreas Kugi, Knut Graichen, Tilman Utz, Christian Ebenbauer.
 - Research collaborations between these authors: Keng Peng Tee and James B. Rawlings, Keng Peng Tee and Darryl DeHaan, Veit Hagenmeyer and Knut Graichen, Bartosz Käpernick and Andreas Kugi, Bartosz Käpernick and Knut Graichen, Karl Henrik Johansson and Christian Ebenbauer, Darryl DeHaan and Knut Graichen, Darryl DeHaan and Christian Ebenbauer, James B. Rawlings and Knut Graichen, James B. Rawlings and Christian Ebenbauer, Andreas Kugi and Knut Graichen, Knut Graichen and Tilman Utz.
+
 One Maximum Clique: [Knut Graichen, Bartosz Käpernick, Andreas Kugi].
 
 **Problem to Solve**
@@ -484,6 +490,7 @@ Molecule A consists of 8 atoms with the following 9 bonds:
 0-1, 0-6, 1-2, 2-3, 3-4, 3-7, 4-5, 5-6, 5-7.
 Molecule B consists of 7 atoms with the following 7 bonds:
 0-1, 1-2, 1-4, 2-3, 3-4, 3-6, 4-5.
+
 One max common subgraph: [2, 3, 4, 5, 7, 6], [0, 1, 2, 3, 4, 6].
 
 **Problem to Solve**
@@ -568,6 +575,7 @@ One Maximum Independent Set: [Melinda Vaughan, Lisa Anderson, Alfred Powell, Mar
 
 - Users in the network: William Lawson, Daniel Shelton, Michelle Lewis, Julie Hayes.
 - Fiendship connections: William Lawson and Daniel Shelton, William Lawson and Julie Hayes, Michelle Lewis and Julie Hayes.
+
 Identify the Maximum Independent Set of this network and present your answer in the following format: [UserA, UserB, UserC, UserD, ...].
 
 ## Response: 
@@ -658,6 +666,7 @@ Your task is to solve the Minimum Vertex Cover problem in the given social netwo
 
 - Users in the network: Julie Harris, David Torres, Vanessa Parker, Shawn Barnett, Karl Dean.
 - Fiendship connections: Julie Harris and Vanessa Parker, Julie Harris and David Torres, Julie Harris and Shawn Barnett, Julie Harris and Karl Dean, David Torres and Vanessa Parker, David Torres and Shawn Barnett, David Torres and Karl Dean, Vanessa Parker and Shawn Barnett, Shawn Barnett and Karl Dean.
+
 One Minimum Vertex Cover: [Julie Harris, David Torres, Shawn Barnett].
 
 **Problem to Solve**
@@ -743,6 +752,7 @@ VPY to BGA: 13255
 AAE to YWB: 7807
 AAE to BGA: 9332
 BGA to YWB: 6575
+
 One shortest route: [VPY, AAE, YWB, BGA, VPY].
 
 **Problem to Solve**
