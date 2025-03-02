@@ -2,7 +2,7 @@
 
 This repository contains the official implementation for the ICLR 2025 paper:  
 
-> [GraphArena: Evaluating and Exploring Large Language Models on Graph Computation](openreview.net/forum?id=Y1r9yCMzeA)  
+> [GraphArena: Evaluating and Exploring Large Language Models on Graph Computation](https://openreview.net/forum?id=Y1r9yCMzeA)  
 > *Jianheng Tang, Qifan Zhang, Yuhan Li, Nuo Chen, Jia Li*  
 > ICLR 2025
 
@@ -21,8 +21,8 @@ pip install rdkit ogb graph-walker
 
 ## Dataset Preparation
 
-Download and unzip `dataset.zip`, which contains the processed dataset.  
-To build the dataset from scratch, download `source.zip` and run `bash utils/build_dataset.sh`.
+Download and unzip `dataset.zip` from the [google drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing), which contains the processed dataset.  
+To build the dataset from scratch, download `source.zip` from the same link and run `bash utils/build_dataset.sh`.
 
 ## Benchmarking LLMs
 
@@ -79,7 +79,7 @@ For detailed metrics and analysis, see our [paper](https://openreview.net/forum?
 
 To reproduce the results from our manuscript, follow these steps:
 
-1. Download and unzip both [`results.zip`](link/to/results) and `dataset.zip`
+1. Download and unzip `results.zip` from the [google drive](https://drive.google.com/drive/folders/1mvJSUTrfOX13wgpkyb3w8s_SJqipnb1c?usp=sharing).
 2. Run all jupyter notebooks in the `reproduce` folder
 
 Note: The evaluation may take a few minutes to complete.
