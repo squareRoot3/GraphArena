@@ -124,7 +124,6 @@ class GED_Task(NPTask):
             return VJ(g1, g2)[1]
         if method == 'approximated':
             return graph_edit_distance(g1, g2)[1]
-            # return nx.graph_edit_distance(g1, g2, node_subst_cost = lambda x, y: 0 if x['label'] == y['label'] else 1, timeout=timeout)
 
 
 def VJ(g1,g2):

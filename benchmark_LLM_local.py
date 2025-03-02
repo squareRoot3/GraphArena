@@ -58,7 +58,7 @@ if __name__ == '__main__':
     tokenizer, model = get_tokenizer_and_model(args.llm)
     
     # inference
-    all_data = json.load(open('dataset/GraphArena_text.json'))
+    all_data = json.load(open('dataset/GraphArena_text.json'))  # alternative: GraphArena_text_0shot.json
     results = 'results/'
 
     response_dict = {}

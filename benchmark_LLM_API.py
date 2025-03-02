@@ -9,21 +9,25 @@ from time import sleep
 import os
 
 llm_to_api = {
-    "gpt4": "gpt-4o",
-    "gpt": "gpt-3.5-turbo-0125", 
-    "claude": "claude-3-haiku-20240307",
-    "mixtral": "mistralai/Mixtral-8x7B-Instruct-v0.1",
-    "deepseek": "deepseek-chat",
+    "gpt4": "gpt-4o-2024-08-06",
+    "gpt4mini": "gpt-4o-mini-2024-07-18",
+    "gpt": "gpt-3.5-turbo-0125",
+    "gpto3": "gpt-3.5-turbo-0125",
+    "claude": "Claude-3.5-Sonnet",
+    "glm": "glm-4-plus",
+    "qwen72b": "Qwen2.5-72B-Instruct",
     "llama8b": "meta-llama/Llama-3-8b-chat-hf",
     "llama": "meta-llama/Llama-3-70b-chat-hf",
-    "qwen7b": "qwen1.5-7b-chat",
-    "qwen": "qwen1.5-72b-chat",
     "gemma": "gemma-7b-it",
+    "mixtral": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "deepseek": "deepseek-chat",
+    "doubao": "ep-20250215195227-lg4pc",
+    "dsR1": "ep-20250215203640-lxb6j"
 }
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--llm', type=str, default='gpt', help='llm model name')
+    parser.add_argument('--llm', type=str, default='gpt4', help='llm model name')
     parser.add_argument('--task', type=str, default='TSP', help='task name')
     parser.add_argument('--problem_num', type=int, default=10, help='number of problems')
     parser.add_argument('--example_num', type=int, default=2, help='number of examples')
@@ -34,7 +38,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     classname = args.task + '_Task'
-    task = globals()[classname]('dataset4')
+    task = globals()[classname]('dataset')
     task.load_dataset(args.difficulty)
     error_knt = 0
     
@@ -43,18 +47,26 @@ if __name__ == '__main__':
     for llm in args.llm.split('-'):
         if 'gpt' in llm:
             client = OpenAI(
-                base_url = "https://api.openai.com/v1/chat/completions", # Replace it to other API endpoint (e.g., AIMLAPI) if OpenAI is unavailable.
+                base_url = "https://api.openai.com", # Replace it if you use other API server.
                 api_key = 'YOUR_API_KEY', # Replace the API key with your own
             )
-        elif 'deepseek' in llm:
+        elif 'deepseek' == llm:
             client = OpenAI(
                 base_url = "https://api.deepseek.com",
                 api_key = 'YOUR_API_KEY'
             )
+        elif 'glm' in llm:
+            from zhipuai import ZhipuAI
+            client = ZhipuAI(api_key='YOUR_API_KEY')
         elif 'qwen' in llm:
             client = OpenAI(
                 base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
                 api_key="YOUR_API_KEY",
+            )
+        elif 'doubao' in llm or "dsR1" in llm:
+            client = OpenAI(
+                api_key = os.environ.get("ARK_API_KEY"),
+                base_url = "https://ark.cn-beijing.volces.com/api/v3",
             )
         else:
             client = OpenAI(
@@ -69,6 +81,8 @@ if __name__ == '__main__':
 
         if not os.path.exists(f"results/tmp_{args.results}"):
             os.makedirs(f"results/tmp_{args.results}")
+        
+        all_data = {}
         for i in range(0, args.problem_num):
             system_prompt = "You are an advanced AI specialized in solving graph problems. Provide the solution without writing or executing any code, and present your answer within brackets []. Do not use brackets in other places."
             i = str(i)
@@ -78,16 +92,30 @@ if __name__ == '__main__':
                     continue
             response_dict[i] = {}
             try:
-                chat_completion = client.chat.completions.create(
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": task.insert_example(int(i), args.example_num)},
-                    ],
-                    model=llm_to_api[llm],
-                    seed=42,
-                    temperature=0.1
-                )
+                if llm == 'dsR1':
+                    chat_completion = client.chat.completions.create(
+                        messages=[
+                            {"role": "user", "content": system_prompt + task.insert_example(int(i), args.example_num)},
+                        ],
+                        model=llm_to_api[llm],
+                        seed=42,
+                        temperature=0.6,
+                        top_p=0.95
+                    )
+                else:
+                    chat_completion = client.chat.completions.create(
+                        messages=[
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": task.insert_example(int(i), args.example_num)},
+                        ],
+                        model=llm_to_api[llm],
+                        seed=42,
+                        temperature=0.1
+                    )
+                all_data[i] = chat_completion
                 response_dict[i][llm] = chat_completion.choices[0].message.content
+                if llm == 'dsR1':
+                    response_dict[i][llm] = chat_completion.choices[0].message.reasoning_content + chat_completion.choices[0].message.content
                 print(llm, i, response_dict[i][llm])
             except Exception as e:
                 print('Call API failed! ', e)
@@ -103,4 +131,5 @@ if __name__ == '__main__':
         os.makedirs(f"results/{args.results}")
     with open(f"results/{args.results}/{args.llm}_{args.task}_{args.difficulty}_{now.strftime('%d_%H-%M')}.json", 'w') as f:
         json.dump(response_dict, f)
-        
+    with open('log/{}_{}_{}.pkl'.format(args.llm, args.task, args.difficulty), 'wb') as f:
+        pickle.dump(all_data, f)

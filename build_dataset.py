@@ -15,9 +15,10 @@ if __name__ == '__main__':
     parser.add_argument('--task', type=str, default='TSP', help='task name')
     parser.add_argument('--problem_num', type=int, default=500, help='number of problems')
     parser.add_argument('--loc', type=str, default='dataset', help='dataset location')
+    parser.add_argument('--seed', type=int, default=0, help='random seed')
     args = parser.parse_args()
     classname = args.task + '_Task'
-    set_seed(0)
+    set_seed(args.seed)
     task = globals()[classname](args.loc)
     task.generate_dataset(count=args.problem_num)
     for p in task.problem_set:

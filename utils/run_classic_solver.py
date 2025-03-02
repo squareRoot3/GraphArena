@@ -30,33 +30,22 @@ if __name__ == '__main__':
     task = GED_Task('dataset')
     task.load_dataset('hard')
 
-    # Determine the number of CPU cores to use
     num_cores = mp.cpu_count()
-
-    # Create a manager for shared objects
     manager = mp.Manager()
     result_dict = manager.dict()
-
-    # Create a pool of worker processes
     pool = mp.Pool(processes=num_cores)
-
-    # Start the processing
     for problem in task.problem_set[:500]:
         pool.apply_async(process_problem, args=(problem, result_dict))
 
-    # Monitor and save results every 10 minutes
     start_time = time.time()
     while pool._cache:
-        time.sleep(10)  # Check every 10 seconds
-        if time.time() - start_time >= 600:  # 600 seconds = 10 minutes
+        time.sleep(10)
+        if time.time() - start_time >= 600:  # save the result every 10 minutes
             save_results(task, result_dict)
             start_time = time.time()
 
-    # Close the pool and wait for all processes to finish
     pool.close()
     pool.join()
-
-    # Final save
     save_results(task, result_dict)
 
     print("Processing complete.")

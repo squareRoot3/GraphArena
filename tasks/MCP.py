@@ -124,6 +124,6 @@ class MCP_Task(NPTask):
             for node in nodes:
                 if all(node in graph.neighbors(neighbor) for neighbor in max_clique):
                     max_clique.append(node)
-        elif method == 'chris':
+        elif method == 'approximated':
             max_clique = list(nx.approximation.max_clique(graph))
         return len(max_clique), max_clique

@@ -143,7 +143,7 @@ class MVC_Task(NPTask):
                 # Remove all edges covered by u or v
                 edges = [edge for edge in edges if u not in edge and v not in edge]
 
-        elif method == 'chris':
+        elif method == 'approximated':
             min_vertex_cover = list(self.min_weighted_vertex_cover(graph,weight=None))
         return len(min_vertex_cover),min_vertex_cover
 

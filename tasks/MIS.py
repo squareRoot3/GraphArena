@@ -110,7 +110,7 @@ class MIS_Task(NPTask):
                 if not any(neighbor in independent_set for neighbor in graph.neighbors(node)):
                     independent_set.append(node)
 
-        elif method == 'chris':
+        elif method == 'approximated':
             independent_set = list(nx.approximation.maximum_independent_set(graph))
             
         return len(independent_set),independent_set

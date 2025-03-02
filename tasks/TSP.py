@@ -138,7 +138,7 @@ class TSP_Task(NPTask):
             route = route + [route[0]]
         elif method == 'greedy':
             route = nx.approximation.traveling_salesman_problem(graph, cycle=True, weight='weight', method=nx.approximation.greedy_tsp)
-        elif method == 'chris':
+        elif method == 'approximated':
             route = nx.approximation.traveling_salesman_problem(graph, cycle=True, weight='weight', method=nx.approximation.christofides)
         return self.compute_tour_length(graph, route), route
 
